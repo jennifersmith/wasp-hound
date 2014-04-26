@@ -1,7 +1,6 @@
 (ns wasp-hound.core-test
-  (:use clojure.test
+  (:use midje.sweet
         wasp-hound.core))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+
+(fact 1  => 1)

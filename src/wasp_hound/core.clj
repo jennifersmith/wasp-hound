@@ -1,6 +1,6 @@
-(ns wasp-hound.core)
+(ns wasp-hound.core
+  (:gen-class))
 
-(defn foo
-  "I don't do a whole lot."
+(defn -main
   [x]
   (println x "Hello, World!"))

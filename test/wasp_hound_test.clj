@@ -20,3 +20,7 @@
 (fact "order by occurrences"
       (detect-magic-keys dupey-code-snippet) => [[:wibble 3] [:foo 2]])
 
+(fact "find magic keys on a file"
+      (magic-keys-in-file "fixtures/some-code/file1.clj") => [[:bar 3]])
+
+

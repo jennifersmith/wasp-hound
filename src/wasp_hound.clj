@@ -1,4 +1,4 @@
-(ns wasp-hound.core
+(ns wasp-hound
   (:gen-class))
 
 (defn -main

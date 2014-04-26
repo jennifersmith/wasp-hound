@@ -7,7 +7,10 @@
   (->> code
    (tree-seq coll? seq)
    (filter keyword?)
-   (frequencies)))
+   (frequencies)
+   (filter (comp #(> % 1) second))
+   (sort-by second)
+   (reverse)))
 
 (defn -main
   [x]

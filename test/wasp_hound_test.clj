@@ -3,13 +3,20 @@
         wasp-hound))
 
 (def code-snippet 
-  '(defn foo {:foo 1 :bar 2}))
+  (vector
+     '(def foo {:foo 1 :wibble 2})
+     '(def bar {:foo 1})))
 
-(def second-code-snippet
-  '(defn dupe {:foo 1}))
+(def dupey-code-snippet 
+  (vector
+   '(defn more [{:foo foo :wibble wibble}] (inc foo))
+   '(defn yet-more [{:wibble bar}] (inc bar))
+   '(def foo {:wibble 2})
+   '(def bar {:foo 1})))
 
-(fact "parses all the code we give it and produces a report about the usage of keywords"
-      (detect-magic-keys code-snippet) => {:foo 1 :bar 1})
+(fact "parses all the code we give it and produces a report about multi usage of keywords"
+      (detect-magic-keys code-snippet) => [[:foo 2]])
 
-(fact "copes with multiple defs"
-      (detect-magic-keys (vector code-snippet second-code-snippet)) => {:foo 2 :bar 1})
+(fact "order by occurrences"
+      (detect-magic-keys dupey-code-snippet) => [[:wibble 3] [:foo 2]])
+

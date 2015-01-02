@@ -24,3 +24,5 @@
       (magic-keys-in-file "fixtures/some-code/file1.clj") => [[:bar 3]])
 
 
+(fact "find magic keys in a dir"
+      (magic-keys-in-dir "fixtures/some-code/") => :todo)

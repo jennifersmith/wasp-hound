@@ -12,10 +12,7 @@
   (->> code
    (tree-seq coll? seq)
    (filter keyword?)
-   (frequencies)
-   (filter (comp #(> % 1) second))
-   (sort-by second)
-   (reverse)))
+   (frequencies)))
 
 (defn read-all [code-string]
   (let [pushback-reader (t/string-push-back-reader code-string)]
@@ -30,6 +27,21 @@
         code (read-all code-string)]
     (detect-magic-keys code)))
 
+(defn get-files [path]
+  (remove #(.isDirectory %) (file-seq (clojure.java.io/file path))))
+
+(defn combine-results [left right])
+(defn magic-keys-in-dir [path]
+  (let [files (get-files path)
+        per-file (map magic-keys-in-file files)
+        ]
+    (->> (get-files path)
+         (map magic-keys-in-file)
+         (apply merge-with combine-results)
+         )))
+
 (defn -main
   [x]
   (println x "Hello, World!"))
+
+
